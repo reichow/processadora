@@ -1,16 +1,11 @@
 package br.com.camila.processadora.config;
 
-import br.com.camila.statemachine.annotation.EventTemplate;
-import br.com.camila.statemachine.annotation.RabbitEnabled;
-import br.com.camila.statemachine.event.AnalisarPrePropostaEvent;
-import br.com.camila.statemachine.event.CriarPropostaEvent;
-import br.com.camila.statemachine.interceptor.HeaderMessageInterceptor;
-import br.com.camila.statemachine.interceptor.TraceMessageInterceptor;
-import br.com.camila.statemachine.message.AnalisarPrePropostaMessage;
-import br.com.camila.statemachine.message.CriarPropostaMessage;
-import br.com.camila.statemachine.messaging.MessageOutbox;
-import br.com.camila.statemachine.messaging.Messaging;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static java.util.Arrays.asList;
+import static java.util.Objects.nonNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.DefaultClassMapper;
@@ -19,11 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static java.util.Arrays.asList;
-import static java.util.Objects.nonNull;
+import br.com.camila.processadora.annotation.EventTemplate;
+import br.com.camila.processadora.annotation.RabbitEnabled;
+import br.com.camila.processadora.domain.TipoProposta;
+import br.com.camila.processadora.interceptor.HeaderMessageInterceptor;
+import br.com.camila.processadora.interceptor.TraceMessageInterceptor;
+import br.com.camila.processadora.message.AtualizarEmailValidadoMessage;
+import br.com.camila.processadora.message.AtualizarInfosPessoaisMessage;
+import br.com.camila.processadora.messaging.MessageOutbox;
+import br.com.camila.processadora.messaging.Messaging;
 
 @Configuration
 @RabbitEnabled
@@ -53,10 +54,10 @@ public class RabbitTemplateConfiguration {
     DefaultClassMapper jsonClassMapper() {
 
         final Map<String, Class<?>> mapping = new HashMap<>();
-        asList(CriarPropostaMessage.class,
-            AnalisarPrePropostaMessage.class,
-            CriarPropostaEvent.class,
-            AnalisarPrePropostaEvent.class)
+        asList(
+            AtualizarInfosPessoaisMessage.class,
+            AtualizarEmailValidadoMessage.class,
+            TipoProposta.class)
             .forEach(clazz -> mapping.put(clazz.getSimpleName(), clazz));
 
         final DefaultClassMapper classMapper = new DefaultClassMapper();

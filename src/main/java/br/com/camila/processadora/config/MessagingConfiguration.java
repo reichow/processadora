@@ -1,13 +1,14 @@
 package br.com.camila.processadora.config;
 
-import br.com.camila.processadora.annotation.RabbitEnabled;
-import br.com.camila.processadora.messaging.Messaging;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import br.com.camila.processadora.annotation.RabbitEnabled;
+import br.com.camila.processadora.messaging.Messaging;
 
 @Configuration
 @RabbitEnabled
@@ -22,19 +23,9 @@ public class MessagingConfiguration {
         return new TopicExchange(Messaging.EXCHANGE);
     }
 
-    @Bean
-    TopicExchange eventsExchange() {
-        return new TopicExchange(Messaging.EXCHANGE_EVENTS);
-    }
-
     /**
      * Queues
      **/
-
-    @Bean
-    Queue gfeQueue() {
-        return new Queue(Messaging.QUEUE_GFE);
-    }
 
     @Bean
     Queue atualizarInfosPessoaisQueue() {
@@ -50,13 +41,6 @@ public class MessagingConfiguration {
     /**
      * Bindings
      **/
-
-    @Bean
-    Binding gfeQueueToEventsExchangeBinder() {
-        return BindingBuilder.bind(gfeQueue())
-            .to(eventsExchange())
-            .with(Messaging.GFE.getRoutingKey());
-    }
 
     @Bean
     Binding atualizarInfosPessoaisQueueToProcessaoraExchangeBinder() {

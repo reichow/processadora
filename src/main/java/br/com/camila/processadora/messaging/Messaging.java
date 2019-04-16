@@ -5,21 +5,19 @@ package br.com.camila.processadora.messaging;
  */
 public interface Messaging {
 
-    EventOutbox INFOS_PESSOAIS_ATUALIZADAS_PROCESSADORA = new EventOutbox("processadora.infos-pessoais-atualizadas-processadora.success.event");
-    EventOutbox EMAIL_VALIDADO_ATUALIZADO_PROCESSADORA = new EventOutbox("processadora.email-validado-atualizado-processadora.success.event");
-
-    EventOutbox INFOS_PESSOAIS_ATUALIZADAS_PROCESSADORA_EROOR = new EventOutbox("processadora.infos-pessoais-atualizadas-processadora.error.event");
-    EventOutbox EMAIL_VALIDADO_ATUALIZADO_PROCESSADORA_ERROR = new EventOutbox("processadora.email-validado-atualizado-processadora.error.event");
-
+    //msg enviada para api proposta/sm
     MessageInbox ATUALIZAR_INFOS_PESSOAIS_PROCESSADORA = new MessageInbox("processadora.atualizar-infos-pessoais-processadora.message");
     MessageInbox ATUALIZAR_EMAIL_VALIDADO_PROCESSADORA = new MessageInbox("processadora.atualizar-email-validado-processadora.message");
 
-    MessageOutbox GFE = new MessageOutbox("gfe.armazenar-mensagem-gfe.message");
+    //msg enviada para api proposta/sm
+    MessageOutbox INFOS_PESSOAIS_ATUALIZADAS = new MessageOutbox("proposta.pre-proposta-analisada.message");
+    MessageOutbox EMAIL_VALIDADO_ATUALIZADO = new MessageOutbox("proposta.pos-proposta-analisada.message");
 
+    //exchange
     String EXCHANGE = "processadora.exchange";
     String EXCHANGE_EVENTS = "processadora.events.exchange";
 
-    String QUEUE_GFE = "gfe.armazenar-mensagem-gfe.queue";
+    //filas
     String QUEUE_ATUALIZAR_INFOS_PESSOAIS = "processadora.atualizar-infos-pessoais.queue";
     String QUEUE_ATUALIZAR_EMAIL_VALIDADO = "processadora.atualizar-email-validado.queue";
 }
