@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.camila.processadora.annotation.EventTemplate;
 import br.com.camila.processadora.annotation.RabbitEnabled;
-import br.com.camila.processadora.domain.TipoProposta;
+import br.com.camila.processadora.domain.Tipo;
 import br.com.camila.processadora.interceptor.HeaderMessageInterceptor;
 import br.com.camila.processadora.interceptor.TraceMessageInterceptor;
 import br.com.camila.processadora.message.AtualizarEmailValidadoMessage;
@@ -57,7 +57,7 @@ public class RabbitTemplateConfiguration {
         asList(
             AtualizarInfosPessoaisMessage.class,
             AtualizarEmailValidadoMessage.class,
-            TipoProposta.class)
+            Tipo.class)
             .forEach(clazz -> mapping.put(clazz.getSimpleName(), clazz));
 
         final DefaultClassMapper classMapper = new DefaultClassMapper();

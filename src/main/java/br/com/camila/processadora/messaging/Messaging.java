@@ -5,11 +5,9 @@ package br.com.camila.processadora.messaging;
  */
 public interface Messaging {
 
-    //msg enviada para api proposta/sm
     MessageInbox ATUALIZAR_INFOS_PESSOAIS_PROCESSADORA = new MessageInbox("processadora.atualizar-infos-pessoais-processadora.message");
     MessageInbox ATUALIZAR_EMAIL_VALIDADO_PROCESSADORA = new MessageInbox("processadora.atualizar-email-validado-processadora.message");
 
-    //msg enviada para api proposta/sm
     MessageOutbox INFOS_PESSOAIS_ATUALIZADAS = new MessageOutbox("proposta.pre-proposta-analisada.message");
     MessageOutbox EMAIL_VALIDADO_ATUALIZADO = new MessageOutbox("proposta.pos-proposta-analisada.message");
 
